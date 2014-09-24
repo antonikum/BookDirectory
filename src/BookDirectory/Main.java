@@ -16,6 +16,7 @@ public class Main
     public static void main(String[] args){
         /** Logger initialization **/
         try{
+            Model.getInstance().getProperties("BookDirectory.properties");
             if(!Model.getInstance().startLogger("logs")){
                 FileHandler fileHandler = new FileHandler("BookDirectoryLog.txt");
                 fileHandler.setEncoding("UTF-8");
@@ -28,10 +29,10 @@ public class Main
             LOGGER.log(Level.INFO, "Java version is ", System.getProperty("java.version") + ", vendor: " + System.getProperty("java.vendor"));
             LOGGER.log(Level.INFO, "Working directory is ", System.getProperty("user.dir"));
             LOGGER.log(Level.INFO, "System name is: ", System.getProperty("os.name") + " (version: " + System.getProperty("os.version") + ") " + ", system arch: " + System.getProperty("os.arch"));
+            LOGGER.log(Level.INFO, "Is development mode? ", Model.getInstance().isDevelopmentMode());
+            LOGGER.log(Level.INFO, "The level of logging: ", Model.getInstance().getLOG_LEVEL());
 
             /**Main engine **/
-            Model.getInstance().getProperties("BookDirectory.properties");
-            LOGGER.log(Level.INFO, "Is development mode? ", Model.getInstance().isDevelopmentMode());
             Model.getInstance().setLocaleWindows();
             View.getInstance().initializeView();
             Controller.getInstance().mainMenuDraw();
