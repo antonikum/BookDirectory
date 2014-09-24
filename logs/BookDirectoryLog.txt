@@ -1,0 +1,32 @@
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Main {method}main [INFO] Start application
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Main {method}main [INFO] Java version is 1.6.0_45, vendor: Sun Microsystems Inc.
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Main {method}main [INFO] Working directory is C:\Users\Dyakonov\Dropbox\java\IDEA\Book Directory
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Main {method}main [INFO] System name is: Windows 7 (version: 6.1) , system arch: amd64
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Model {method}getProperties [FINE] Properties have been loaded successfully
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Main {method}main [INFO] Is development mode? true
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.View {method}initializeView [FINE] Print welcome message
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.View {method}printMenu [FINE] Print menu
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Model {method}keyboardInput [FINE] Input is: 1
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Controller {method}checkMenuItem [FINE] The result of check menu selection is: true
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.View {method}printMenu [FINE] Print menu
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Controller {method}menuDraw [FINE] The call of menuDraw
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Controller {method}firstMenuEngine [FINE] Menu select: list of books(1)
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Model {method}getBooks [FINE] The call of Model.getBooks()
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Model {method}getBookIsbnSize [FINE] BookIsbnSize is: 17
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Model {method}getBookTitleSize [FINE] BookTitleSize is: 128
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Model {method}getBookAuthorSize [FINE] BookAuthorSize is: 128
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Model {method}getIllustrationIdSize [FINE] IllustrationIdSize is: 20
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Model {method}getIllustrationNameSize [FINE] IllustrationNameSize is: 128
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Model {method}getBookAuthorSize [FINE] BookAuthorSize is: 128
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.DerbyDBManager {method}dbExists [WARNING] Creation of a new database!
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.DerbyDBManager {method}executeUpdate [FINE] The count of executeUpdate is: 0
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.DerbyDBManager {method}executeUpdate [FINE] The count of executeUpdate is: 0
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Model {method}getBooks [FINE] Time spent on the output the catalog (in ms):1539
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Model {method}checkAvailabilityBooks [FINE] In the directory there are books?false
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Controller {method}backToMainMenu [FINE] Back to main menu.
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Model {method}keyboardInput [FINE] Input is: 
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.View {method}printMenu [FINE] Print menu
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Model {method}keyboardInput [FINE] Input is: 
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Main {method}main [FINE] The used memory (in MBytes):2
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Main {method}main [FINE] The used memory (in Bytes):2185768
+[Date & Time] сен 23,2014 17:33 {Class}BookDirectory.Main {method}main [INFO] End application

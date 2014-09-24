@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Book Directory:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Book_Directory_jar</output-path>
+    <root id="archive" name="Book Directory.jar">
+      <element id="module-output" name="Book Directory" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/junit-4.11.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/derby.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

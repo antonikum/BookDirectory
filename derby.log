@@ -1,0 +1,79 @@
+Tue Sep 23 17:33:34 MSK 2014 Thread[main,5,main] Cleanup action starting
+java.sql.SQLException: Database 'db/booksdb' not found.
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection30.<init>(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection40.<init>(Unknown Source)
+	at org.apache.derby.jdbc.Driver40.getNewEmbedConnection(Unknown Source)
+	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
+	at org.apache.derby.jdbc.AutoloadedDriver.connect(Unknown Source)
+	at java.sql.DriverManager.getConnection(DriverManager.java:582)
+	at java.sql.DriverManager.getConnection(DriverManager.java:207)
+	at BookDirectory.DerbyDBManager.dbExists(DerbyDBManager.java:75)
+	at BookDirectory.DerbyDBManager.<init>(DerbyDBManager.java:41)
+	at BookDirectory.Model.getBooks(Model.java:166)
+	at BookDirectory.Model.checkAvailabilityBooks(Model.java:366)
+	at BookDirectory.Controller.firstMenuEngine(Controller.java:132)
+	at BookDirectory.Controller.menuDraw(Controller.java:85)
+	at BookDirectory.Controller.mainMenuDraw(Controller.java:57)
+	at BookDirectory.Main.main(Main.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:134)
+Caused by: java.sql.SQLException: Database 'db/booksdb' not found.
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
+	... 27 more
+============= begin nested exception, level (1) ===========
+java.sql.SQLException: Database 'db/booksdb' not found.
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.wrapArgsForTransportAcrossDRDA(Unknown Source)
+	at org.apache.derby.impl.jdbc.SQLExceptionFactory40.getSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.newEmbedSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.Util.generateCsSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.newSQLException(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.handleDBNotFound(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection.<init>(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection30.<init>(Unknown Source)
+	at org.apache.derby.impl.jdbc.EmbedConnection40.<init>(Unknown Source)
+	at org.apache.derby.jdbc.Driver40.getNewEmbedConnection(Unknown Source)
+	at org.apache.derby.jdbc.InternalDriver.connect(Unknown Source)
+	at org.apache.derby.jdbc.AutoloadedDriver.connect(Unknown Source)
+	at java.sql.DriverManager.getConnection(DriverManager.java:582)
+	at java.sql.DriverManager.getConnection(DriverManager.java:207)
+	at BookDirectory.DerbyDBManager.dbExists(DerbyDBManager.java:75)
+	at BookDirectory.DerbyDBManager.<init>(DerbyDBManager.java:41)
+	at BookDirectory.Model.getBooks(Model.java:166)
+	at BookDirectory.Model.checkAvailabilityBooks(Model.java:366)
+	at BookDirectory.Controller.firstMenuEngine(Controller.java:132)
+	at BookDirectory.Controller.menuDraw(Controller.java:85)
+	at BookDirectory.Controller.mainMenuDraw(Controller.java:57)
+	at BookDirectory.Main.main(Main.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at com.intellij.rt.execution.application.AppMain.main(AppMain.java:134)
+============= end nested exception, level (1) ===========
+Cleanup action completed
+----------------------------------------------------------------
+Tue Sep 23 17:33:34 MSK 2014:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.3.2 - (1557835): instance a816c00e-0148-a2b7-980e-000007005e80 
+on database directory C:\Users\Dyakonov\Dropbox\java\IDEA\Book Directory\db\booksdb  with class loader sun.misc.Launcher$AppClassLoader@40affc70 
+Loaded from file:/C:/Users/Dyakonov/Dropbox/java/IDEA/Book%20Directory/lib/derby.jar
+java.vendor=Sun Microsystems Inc.
+java.runtime.version=1.6.0_45-b06
+user.dir=C:\Users\Dyakonov\Dropbox\java\IDEA\Book Directory
+os.name=Windows 7
+os.arch=amd64
+os.version=6.1
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
