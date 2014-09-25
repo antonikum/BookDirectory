@@ -1,6 +1,6 @@
 package BookDirectory;
 
-import java.util.ArrayList;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  * Использует модель и представление для реализации необходимой реакции.
  * Паттерн Singleton.
  * @author dyakonov
- * @version 1.2
+ * @version 1.3
  */
 public final class Controller
 {
@@ -432,14 +432,17 @@ public final class Controller
                     if(LOGGER.isLoggable(Level.INFO)){
                         LOGGER.info("Search for illustrations in the import file");}
                     String[] testValues = findValuesIllustration(fileText);
-                    if(testValues[4] != null){ //проверка, что в тексте присутствует тег [Иллюстрация]
+                    /**проверка, что в тексте присутствует тег [Иллюстрация]**/
+                    if(testValues[4] != null){
                         int offset = 0;
                         while (offset < textSize-2){
                             String buffer = fileText.substring(offset, textSize);
                             String[] illustrationValues = findValuesIllustration(buffer);
-                            if(illustrationValues[4] == null){break;} //проверка дальнейшей целесообразности просмотра текста
+                            /** проверка дальнейшей целесообразности просмотра текста **/
+                            if(illustrationValues[4] == null){break;}
                             Book book = Model.getInstance().getBookByISbn(illustrationValues[1]);
-                            if(book != null){ //проверка, что книга с таким isbn присутствует в каталоге
+                            /** проверка, что книга с таким isbn присутствует в каталоге **/
+                            if(book != null){
                                 if(book.getIllustrations().size() > 0){
                                     boolean illustrationDuplicate = false;
                                     for(Book.Illustration illustration : book.getIllustrations()){
@@ -493,25 +496,37 @@ public final class Controller
                         if (findValuesBook(fileText)[3] != null) {//проверка, что в тексте присутствует тег [Книга]
                             long startTime = System.currentTimeMillis();
                             int offset = 0;
+                            Set<Book> bookImportHashSet = new LinkedHashSet<Book>();
                             while (offset < textSize - 2) {
                                 String buffer = fileText.substring(offset, textSize);
                                 String[] bookValues = findValuesBook(buffer);
                                 if (bookValues[3] == null) {
                                     break;
                                 }
-                                if (Model.getInstance().getBookByISbn(bookValues[0]) == null) {
-                                    if(checkBookValues(bookValues[0], bookValues[1], bookValues[2])){
-                                        if(checkIsbnForbidden(bookValues[0])){
-                                            Model.getInstance().addBook(bookValues[0], bookValues[1], bookValues[2]);
-                                        }
+                                if(checkBookValues(bookValues[0], bookValues[1], bookValues[2])){
+                                    if(checkIsbnForbidden(bookValues[0])){
+                                        bookImportHashSet.add(Book.getBook(bookValues[0], bookValues[1], bookValues[2]));
                                     }
-                                } else {
-                                    View.getInstance().printErrorText(15);
-                                    System.out.println(bookValues[0]);
-                                    if(LOGGER.isLoggable(Level.WARNING)){
-                                        LOGGER.log(Level.WARNING, "Found the book already exists in the directory: ", bookValues[0]);}
                                 }
                                 offset += Integer.parseInt(bookValues[3]);
+                            }
+                            if(LOGGER.isLoggable(Level.FINE)){
+                                LOGGER.log(Level.FINE, "Number of books found in the import file: ", bookImportHashSet.size());
+                            }
+                            Set<String> isbnsInCatalog = new HashSet<String>();
+                            for(Book book : Model.getInstance().getBooks()){
+                                isbnsInCatalog.add(book.getIsbn());
+                            }
+                            for(Book book : bookImportHashSet){
+                                if(!isbnsInCatalog.contains(book.getIsbn())){
+                                    Model.getInstance().addBook(book.getIsbn(), book.getName(), book.getAuthor());
+                                }
+                                else{
+                                    View.getInstance().printErrorText(15);
+                                    System.out.println(book.getIsbn());
+                                    if(LOGGER.isLoggable(Level.WARNING)){
+                                        LOGGER.log(Level.WARNING, "Found the book already exists in the directory: ", book.getIsbn());}
+                                }
                             }
                             long stopTime = System.currentTimeMillis();
                             long elapsedTime = stopTime - startTime;
@@ -528,42 +543,64 @@ public final class Controller
                     View.getInstance().printMessage(13);
                     if(LOGGER.isLoggable(Level.INFO)){
                         LOGGER.info("Search for illustrations in the import file");}
-                    if(findValuesIllustration(fileText)[4] != null){ //проверка, что в тексте присутствует тег [Иллюстрация]
+                    /** проверка, что в тексте присутствует тег [Иллюстрация] **/
+                    if(findValuesIllustration(fileText)[4] != null){
                         int offset = 0;
+                        Set<String[]> illustrationSet = new LinkedHashSet<String[]>();
                         while (offset < textSize-2){
                             String buffer = fileText.substring(offset, textSize);
                             String[] illustrationValues = findValuesIllustration(buffer);
-                            if(illustrationValues[4] == null){break;} //проверка дальнейшей целесообразности просмотра текста
-                            Book book = Model.getInstance().getBookByISbn(illustrationValues[1]);
-                            if(book != null){ //проверка, что книга с таким isbn присутствует в каталоге
-                                if(book.getIllustrations().size() > 0){
-                                    boolean illustrationDuplicate = false;
-                                    for(Book.Illustration illustration : book.getIllustrations()){
-                                        if(illustration.getId().equals(illustrationValues[0])){
-                                            System.out.println("Ошибка! В каталоге у книги с Isbn=" + illustrationValues[1] + " уже есть иллюстрация с Id=" + illustrationValues[0]);
-                                            if(LOGGER.isLoggable(Level.WARNING)){
-                                                LOGGER.log(Level.WARNING, "illustration found (with id= "+illustrationValues[0]+") already exists in the catalog and added to the book with isbn: ", illustrationValues[1]);}
-                                            illustrationDuplicate = true;
-                                            break;
-                                        }
-                                    }
-                                    if(!illustrationDuplicate){Model.getInstance().addIllustration(illustrationValues[1], illustrationValues[0], illustrationValues[2], illustrationValues[3]);}
-                                }
-                                else {Model.getInstance().addIllustration(illustrationValues[1], illustrationValues[0], illustrationValues[2], illustrationValues[3]);}
-                            }
-                            else{
-                                System.out.println("Ошибка! Не получилось добавить в каталог иллюстрацию с id=" + illustrationValues[0]+"\nВ каталоге отсутствует книга с ISBN=" + illustrationValues[1]+"\n");
-                                if(LOGGER.isLoggable(Level.WARNING)){
-                                    LOGGER.log(Level.WARNING, "illustration found (with ID= "+illustrationValues[0]+") can not be added to the catalog, there is no book with isbn: ", illustrationValues[1]);}
+                            /** проверка дальнейшей целесообразности просмотра текста **/
+                            if(illustrationValues[4] == null){break;}
+                            if(checkIllustrationValues(illustrationValues[0], illustrationValues[2], illustrationValues[3])){
+                                illustrationSet.add(illustrationValues);
                             }
                             offset += Integer.parseInt(illustrationValues[4]);
+                        }
+                        Set<String[]> isbnsAndIds = new HashSet<String[]>();
+                        for(Book book : Model.getInstance().getBooks()){
+                            String[] isbn_andId = new String[2];
+                            if(book.getIllustrations().size() > 0){
+                                for(Book.Illustration illustration : book.getIllustrations()){
+                                    isbn_andId[0] = illustration.getIsbn();
+                                    isbn_andId[1] = illustration.getId();
+                                    isbnsAndIds.add(isbn_andId);
+                                }
+                            }
+                            else {
+                                isbn_andId[0] = book.getIsbn();
+                                isbnsAndIds.add(isbn_andId);
+                            }
+                        }
+                        for(String[] illustrationValues : illustrationSet){
+                            boolean isbnFound = false;
+                            for(String[] isbnAndId : isbnsAndIds){
+                                if(isbnAndId[0].equals(illustrationValues[1])){ //проверили, что книга с таким isbn есть в каталоге
+                                    isbnFound = true;
+                                    if(!isbnAndId[1].equals(illustrationValues[0])){ //проверка, что у книги нет иллюстрации с таким id
+                                        Model.getInstance().addIllustration(illustrationValues[1], illustrationValues[0], illustrationValues[2], illustrationValues[3]);
+                                    }
+                                    else {
+                                        System.out.println("Ошибка! В каталоге у книги с Isbn=" + illustrationValues[1] + " уже есть иллюстрация с Id=" + illustrationValues[0]);
+                                        if(LOGGER.isLoggable(Level.WARNING)){
+                                            LOGGER.log(Level.WARNING, "illustration found (with id= "+illustrationValues[0]+") already exists in the catalog and added to the book with isbn: ", illustrationValues[1]);
+                                        }
+                                    }
+                                }
+                            }
+                            if(!isbnFound){
+                                System.out.println("Ошибка! Не получилось добавить в каталог иллюстрацию с id=" + illustrationValues[0]+"\nВ каталоге отсутствует книга с ISBN=" + illustrationValues[1]+"\n");
+                                if(LOGGER.isLoggable(Level.WARNING)){
+                                    LOGGER.log(Level.WARNING, "illustration found (with ID= "+illustrationValues[0]+") can not be added to the catalog, there is no book with isbn: ", illustrationValues[1]);
+                                }
+                            }
                         }
                     }
                 }
             }
             catch (Exception e){
                 View.getInstance().printErrorText(17);
-                LOGGER.log(Level.SEVERE, "Application or format file error: " + e.toString() + "");
+                LOGGER.log(Level.SEVERE, "Application or format of file error: " + e.toString() + "");
             }
             returnMainMenu = backToMainMenu();
         }

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
 /**
  * Класс используется как менеджер для работы с бд derby
  * @author dyakonov
@@ -175,7 +174,7 @@ public class DerbyDBManager{
     /**
      * Метод для поиска всех иллюстраций книги в б.д.
      * @param isbn String - Isbn книги, иллюстрации которой нужно найти.
-     * @return ArrayList<String[]> - каждый элемент коллекции (ArrayList) - это параметры иллюстрации(String[3]).
+     * @return ArrayList<String> - каждый элемент коллекции (ArrayList) - это параметры иллюстрации(String[3]).
      * Сколько у книги иллюстрации - столько и элементов в коллекции.
      * @throws SQLException - Ошибки SQL
      */
